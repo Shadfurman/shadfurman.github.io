@@ -1,0 +1,65 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  a:hover {
+    color: #666;
+  }
+  
+  /* Sticky menu */
+  header {
+    background-color: #f8f8f8;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  
+  nav ul li {
+    margin: 0 1rem;
+  }
+  
+  /* Centered description */
+  #home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 4rem; /* Adjust based on header height */
+  }
+  
+  .description {
+    text-align: center;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 2rem;
+    width: 80%;
+    max-width: 500px; /* Adjust based on your preference */
+  }
+  
+  .description h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description p {
+    font-size: 1.1rem;
+  }
+  
