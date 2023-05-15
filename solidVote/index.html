@@ -1,70 +1,85 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>My Title Here</title>
-        <!-- <script  type="text/javascript" src="https://rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script> -->
-        <script  type="text/javascript" src="./node_modules/web3/dist/web3.min.js"></script>
-        <script  type="text/javascript" src="./scripts/SolidVote.js" defer></script> 
-        <link rel="stylesheet" type="text/css" href="style.css">
-	</head>
-	<body>
-        <div id="preamble">
-            <div id="warning">
-                This smart contract is running on a test network, it is NOT SECURE.
-            </div><br>
-            <p>You can get <a href="https://sepolia-faucet.pk910.de/">SepoliaEth from a Sepolia Faucet for free</a> to try the contract.</p>
+
+<head>
+    <meta charset="utf-8">
+    <title>My Title Here</title>
+    <!-- <script  type="text/javascript" src="https://rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script> -->
+    <script type="text/javascript" src="./node_modules/web3/dist/web3.min.js"></script>
+    <script type="text/javascript" src="./scripts/SolidVote.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="preamble">
+        <div id="warning">
+            <p>This smart contract is running on a test network, it is NOT SECURE.</p>
         </div>
+        <p>You can get <a href="https://sepolia-faucet.pk910.de/">SepoliaEth from a Sepolia Faucet for free</a> to try
+            the contract.</p>
+        <p>Heres a ballot already created you can vote on, copy and paste into ballot ID.
+            0x66e791a0a8678f609c2a822557e57fd626fd4ae6518fefaad9286236412f499b</p>
+    </div>
+    <section id="mainUI">
         <div id="connectEthereumWalletForm">
-            <button type="button" onclick="connectEthereumWallet()" id="connectEthereumWalletButton" value="Connect Wallet" style="visibility:visible" disabled>Connect Wallet</button>
+            <button type="button" onclick="connectEthereumWallet()" id="connectEthereumWalletButton"
+                value="Connect Wallet" style="visibility:visible" disabled>Connect Wallet</button>
             <br><br>
         </div>
         <div id="pickBallotAppFunction">
-            <button id="createNewBallotAppButton" onclick="createNewBallotApp()" value="Create a new ballot" disabled>Create a new ballot</button>
-            <button id="voteOnBallotAppButton" onclick="voteOnBallotApp()" value="Vote on a ballot" disabled>Vote on a ballot</button>
+            <button id="createNewBallotAppButton" onclick="createNewBallotApp()" value="Create a new ballot"
+                disabled>Create a new ballot</button>
+            <button id="voteOnBallotAppButton" onclick="voteOnBallotApp()" value="Vote on a ballot" disabled>Vote on a
+                ballot</button>
             <button id="settingsAppButton" onclick="settingsApp()" value="settings" disabled>&#9881;</button>
             <br><br>
         </div>
         <div id="createBallotForm" style="display:none">
             <label for="existingBallotID">Existing Ballot ID</label><br>
-            <input type="text" list="ballotsInStorage" id="existingBallotID" value=""/>
+            <input type="text" list="ballotsInStorage" id="existingBallotID" value="" />
             <button id="refreshBallot" onclick="getExistingBallotWithID()" value="refresh">&#8635;</button>
-            <button id="deleteSelectedBallot" onclick="deleteSelectedBallot()" value="deleteSelectedBallot">&#x1F5D1;</button><br><br>
+            <button id="deleteSelectedBallot" onclick="deleteSelectedBallot()"
+                value="deleteSelectedBallot">&#x1F5D1;</button><br><br>
             <datalist id="ballotsInStorage">
             </datalist>
 
             <label for="ballotLabelText">Title of the ballot </label><br>
             <input type="text" id="ballotLabelText" value="Election Ballot" /><br><br>
 
-            <label for="ballotMessageTextArea">This message will appear after the title and before the list of candidates.<br>It could contain information or instructions about the election.</label><br>
-            <textarea type="textarea" id="ballotMessageTextArea" name="ballotMessageTextAreaName" cols="50" oninput="autoResizeTextArea(this)">Select your preferred candidate from the following list and click the vote button.</textarea><br><br>
-            
+            <label for="ballotMessageTextArea">This message will appear after the title and before the list of
+                candidates.<br>It could contain information or instructions about the election.</label><br>
+            <textarea type="textarea" id="ballotMessageTextArea" name="ballotMessageTextAreaName" cols="50"
+                oninput="autoResizeTextArea(this)">Select your preferred candidate from the following list and click the vote button.</textarea><br><br>
+
             <label for="ballotCandidatesText">List the candidates, seperated by commas </label><br>
             <input type="text" id="ballotCandidatesText" size="50" value="Batman, Greenlantern, Flash, Arrow" /><br><br>
-            
+
             <label for="openElectionCheckbox">Open election </label>
             <input type="checkbox" id="openElectionCheckbox" onclick="openElectionCheckboxClicked()" checked /><br><br>
-            
+
             <div id="voterEthereumAddresses" style="display:none">
                 <label for="voterEthereumAddressesTextArea">Ethereum addresses of all approved voters</label><br>
-                <textarea type="textarea" id="voterEthereumAddressesTextArea" name="voterEthereumAddressesTextAreaName" cols="50" onpaste="ethereumAddressesTextAreaOnPaste(this, event)" onblur="ethereumAddressesTextAreaOnBlur(this)"></textarea>
+                <textarea type="textarea" id="voterEthereumAddressesTextArea" name="voterEthereumAddressesTextAreaName"
+                    cols="50" onpaste="ethereumAddressesTextAreaOnPaste(this, event)"
+                    onblur="ethereumAddressesTextAreaOnBlur(this)"></textarea>
             </div>
 
-            <button id="ballotFormSubmitButton" onclick="submitCreateBallotForm()" value="Submit Ballot">Submit Ballot</button>
+            <button id="ballotFormSubmitButton" onclick="submitCreateBallotForm()" value="Submit Ballot">Submit
+                Ballot</button>
             <button id="updateBallotForm" onclick="updateBallotForm()" value="Update Ballot">Update Ballot</button>
         </div>
 
         <div id="voteOnBallotForm" style="display:none">
             <label for="ballotIDforVote">Ballot ID</label>
             <inline id="openElectionLabel" style="color:red; background-color:black"></inline><br>
-            <input type="text" id="ballotIDforVote" value=""/>
+            <input type="text" id="ballotIDforVote" value="" />
             <button id="getBallotForVote" onclick="getBallotForVote()">&#8635;</button><br>
             <h1 id="ballotLabelLabel"></h1>
             <p id="ballotMessageLabel"></p>
             <div id="listOfCandidatesForVote"></div><br>
             <button id="submitVoteButton" onclick="submitVote()" style="display:none">Submit Vote</button>
         </div>
-        
+
         <div id="settingsForm" style="display:none">
             <label for="deleteAllStorage"> Delete all ballots from localStorage: </label>
             <button id="deleteAllStorage" onclick="deleteAllStorage()" value="deleteAllStorage">&#x1F5D1;</button>
@@ -72,7 +87,8 @@
 
         <div id="confirmDeleteAllStorage" class="dialogBox" style="display:none">
             <h3 id="dialogBoxTitle">Delete All Ballots</h3><br>
-            <div id="dialogBoxMessage">Are you sure you want to delete all ballots in storage? This is irreversible.</div><br>
+            <div id="dialogBoxMessage">Are you sure you want to delete all ballots in storage? This is irreversible.
+            </div><br>
             <span id="dialogBoxButtons">
                 <button id="deleteAllStorageYesButton" onclick="clickDeleteAllStorageYesButton()">YES</button>
                 <button id="deleteAllStorageNoButton" onclick="clickDeleteAllStorageNoButton()">NO</button>
@@ -81,14 +97,19 @@
 
         <div id="confirmDeleteBallotFromStorage" class="dialogBox" style="display:none">
             <h3 id="dialogBoxTitle">Delete Ballot</h3><br>
-            <div id="dialogBoxMessage">Are you sure you want to delete this ballot from storage? This is irreversible.</div><br>
+            <div id="dialogBoxMessage">Are you sure you want to delete this ballot from storage? This is irreversible.
+            </div><br>
             <span id="dialogBoxButtons">
-                <button id="deleteBallotFromStorageYesButton" onclick="clickDeleteBallotFromStorageYesButton()">YES</button>
-                <button id="deleteBallotFromStorageNoButton" onclick="clickDeleteBallotFromStorageNoButton()">NO</button>
+                <button id="deleteBallotFromStorageYesButton"
+                    onclick="clickDeleteBallotFromStorageYesButton()">YES</button>
+                <button id="deleteBallotFromStorageNoButton"
+                    onclick="clickDeleteBallotFromStorageNoButton()">NO</button>
             </span>
         </div>
         <div id="voteTotals" class="dialogBox" style="display:none">
             <h3>Vote Totals:</h3>
         </div>
-	</body>
+    </section>
+</body>
+
 </html>
