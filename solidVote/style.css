@@ -1,0 +1,129 @@
+/* Global Styles */
+
+html {
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #d9d9d9;
+  height: 100%;
+}
+
+body {
+  background-image: radial-gradient(circle at top left, #3a3a3a, #000000);
+  height: 100%;
+  transform: translate(150px, 50px);
+}
+
+/* Buttons */
+
+button,
+input[type="button"],
+input[type="submit"] {
+  background-color: #635f5f;
+  background-image: linear-gradient(to bottom, #bababa 0%, #0f1010 50%);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+  background-image: linear-gradient(to bottom, #000000 50%, #7a7a7a 100%);
+}
+
+button:disabled {
+  background-color: #635f5f;
+  background-image: linear-gradient(to bottom, #777777 0%, #000000 50%);
+  color: #4e4e4e;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: not-allowed;
+}
+
+/* Text Inputs */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  border: 2px solid #88877f;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin: 0 0 16px 0;
+}
+
+p {
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+/* Text Links */
+
+a {
+  color: #82cfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #bababa;
+}
+
+a:active {
+  color: #7a7a7a;
+}
+
+.dialogBox {
+  position: fixed;
+  top: 5%;
+  left: 10%;
+  z-index: 10;
+  color: #000000;
+  border: 2px solid;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#warning {
+  border: 3px solid white;
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 10px;
+  margin: 10px;
+}
+
+#preamble {
+  border: 3px solid gray;
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: 1em;
+  padding: 10px;
+  margin: 30px;
+}
