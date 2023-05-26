@@ -2,26 +2,38 @@
 const web3 = new Web3(Web3.givenProvider || 'https://rpc.sepolia.dev');
 // const web3 = new Web3(Web3.givenProvider || 'https://eth-goerli.public.blastapi.io');
 
-const jsonAbiFile = "./build/contracts/SolidVote.json";
+const jsonAbiFile = "../build/contracts/SolidVote.json";
 const jsonContractAddressFile = "./contract-address.json";
 
-if (!web3.currentProvider) {
+if (web3.currentProvider) {
+    console.log("Web3 provider found: ", web3.currentProvider);
+} else {
     console.error("No Web3 provider found. Make sure to install MetaMask or another Web3 provider.");
 }
 
 // connect to contract
 async function getAbi(jsonFile) {
-    const response = await fetch(jsonFile, { headers: { 'Content-Type': 'application/json' } });
-    const contractJson = await response.json();
-    abi = await contractJson.abi;
-    return abi;
+    try {
+        const response = await fetch(jsonFile, { headers: { 'Content-Type': 'application/json' } });
+        const contractJson = await response.json();
+        abi = await contractJson.abi;
+        console.log("Abi found: ", abi);
+        return abi;
+    } catch(error) {
+        console.error("Error getting ABI");
+    }
 }
 
 async function getContractAddress(jsonFile) {
-    const response = await fetch(jsonFile, { headers: { 'Content-Type': 'application/json' } });
-    const contractJson = await response.json();
-    const contractAddress = await contractJson.contractAddress;
-    return contractAddress;
+    try {
+        const response = await fetch(jsonFile, { headers: { 'Content-Type': 'application/json' } });
+        const contractJson = await response.json();
+        const contractAddress = await contractJson.contractAddress;
+        console.log("Contract Address found: ", contractAddress);
+        return contractAddress;
+    } catch(error) {
+        console.error("Error getting contract address");
+    }
 }
 
 let contract;
@@ -29,9 +41,8 @@ async function connectToContractOnBlockchain() {
     try {
         const abi = await getAbi(jsonAbiFile);
         const contractAddress = await getContractAddress(jsonContractAddressFile);
-        console.log("Contract address: ", "[" + contractAddress + "]");
         contract = await new web3.eth.Contract(abi, contractAddress);
-        console.log("Contract: ", contract);
+        console.log("Connected to contract on chain: ", contract);
         document.getElementById('connectEthereumWalletButton').disabled = false;
         document.getElementById('createNewBallotAppButton').disabled = false;
         document.getElementById('voteOnBallotAppButton').disabled = false;
@@ -56,10 +67,17 @@ if (typeof window.ethereum !== 'undefined') {
 let account;
 async function connectEthereumWallet() {
     if (web3BrowserAvailable) {
-        const accounts = await web3.eth.getAccounts();
-        account = accounts[0];
-        document.getElementById('connectEthereumWalletForm').style.display = 'none';
-        console.log('Ethereum Wallet Connected, address: ' + account);
+        try {
+            const accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+            if (account === undefined) { throw new Error("Account number returned undefined"); }
+            console.log('Ethereum Wallet Connected, address: ', account);
+            document.getElementById('connectEthereumWalletForm').style.display = 'none';
+            document.getElementById('ballotFormSubmitButton').disabled = false;
+            document.getElementById('submitVoteButton').disabled = false;
+        } catch (error) {
+            console.log("Error connected to wallet")
+        }
     }
 }
 

@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>solidVote Smart Contract</title>
-    <script type="text/javascript" src="./node_modules/web3/dist/web3.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="text/javascript" src="./node_modules/web3/dist/web3.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
     <script type="text/javascript" src="./scripts/SolidVote.js" defer></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -63,9 +65,9 @@
                     onblur="ethereumAddressesTextAreaOnBlur(this)"></textarea>
             </div>
 
-            <button id="ballotFormSubmitButton" onclick="submitCreateBallotForm()" value="Submit Ballot">Submit
+            <button id="ballotFormSubmitButton" onclick="submitCreateBallotForm()" value="Submit Ballot" disabled>Submit
                 Ballot</button>
-            <button id="updateBallotForm" onclick="updateBallotForm()" value="Update Ballot">Update Ballot</button>
+            <button id="updateBallotForm" onclick="updateBallotForm()" value="Update Ballot" disabled>Update Ballot</button>
         </div>
 
         <div id="voteOnBallotForm" style="display:none">
@@ -76,7 +78,7 @@
             <h1 id="ballotLabelLabel"></h1>
             <p id="ballotMessageLabel"></p>
             <div id="listOfCandidatesForVote"></div><br>
-            <button id="submitVoteButton" onclick="submitVote()" style="display:none">Submit Vote</button>
+            <button id="submitVoteButton" onclick="submitVote()" style="display:none" disabled>Submit Vote</button>
         </div>
 
         <div id="settingsForm" style="display:none">
