@@ -68,6 +68,11 @@ let account;
 async function connectEthereumWallet() {
     if (web3BrowserAvailable) {
         try {
+            if (window.ethereum.enable) {
+                await window.ethereum.enable();
+            } else if (window.ethereum.request) {
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+            }
             const accounts = await web3.eth.getAccounts();
             account = accounts[0];
             if (account === undefined) { throw new Error("Account number returned undefined"); }
