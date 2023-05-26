@@ -76,7 +76,7 @@ async function connectEthereumWallet() {
             document.getElementById('ballotFormSubmitButton').disabled = false;
             document.getElementById('submitVoteButton').disabled = false;
         } catch (error) {
-            console.log("Error connected to wallet")
+            console.error("Error connecting to wallet");
         }
     }
 }
