@@ -2,7 +2,7 @@
 const web3 = new Web3(Web3.givenProvider || 'https://rpc.sepolia.dev');
 // const web3 = new Web3(Web3.givenProvider || 'https://eth-goerli.public.blastapi.io');
 
-const jsonAbiFile = "../build/contracts/SolidVote.json";
+const jsonAbiFile = "./SolidVote.json";
 const jsonContractAddressFile = "./contract-address.json";
 
 if (web3.currentProvider) {
