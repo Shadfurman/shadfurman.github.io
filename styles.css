@@ -36,12 +36,12 @@ body {
   }
   
   /* Centered description */
-  #solidVote {
+  section {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding-top: 4rem; /* Adjust based on header height */
+    padding-top: 4rem;
   }
   
   .description {
